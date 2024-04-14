@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-xy@=#v*#0yj@^gsl*0f+ci9+)8@v-x#7+npdvh50fn7^s9ow8g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
 
 
 # Application definition
@@ -61,6 +61,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
+    "http://0.0.0.0:3000",
+    "http://0.0.0.0:5173",
 ]
 
 ROOT_URLCONF = "canopeum_backend.urls"

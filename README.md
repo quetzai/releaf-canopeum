@@ -54,7 +54,7 @@ For backend
 
    ```shell
    cd canopeum_backend
-   python3.12 -m venv .venv
+   python3 -m venv .venv
    ```
 
    or on Windows if "python3.12" is not a recognized command:
@@ -67,7 +67,7 @@ For backend
    Then activate the environemnt (you need to do this everytime if your editor isn't configured to do so):
 
    ```shell
-   source .venv/scripts/activate
+   source .venv/bin/activate
    ```
 
    and on Windows:
@@ -87,6 +87,7 @@ For backend
    cd canopeum_backend
    python -m pip install -r requirements-dev.txt
    python manage.py initialize_database
+   # if running the db from docker, use `MYSQL_HOST=0.0.0.0` before next command
    python manage.py runserver
    ```
 
@@ -95,8 +96,20 @@ For backend
    ```shell
    cd canopeum_frontend
    npm install
+   # if running frontend on docker, change .env: VITE_API_URL="http://0.0.0.0:8000"
    npm run dev
    ```
+
+   This is where the fun starts, maplibre-gl 4.1.1 doesn't really work out of
+   the box in this project.
+   First the issue is:
+      `unexpected end of file maplibre-gl/dist/maplibre-gl.js.map`
+   The workaround is to open `node_modules/maplibre-gl/dist/maplibre-gl.js`
+   and remove line 59: `//# sourceMappingURL=maplibre-gl.js.map`
+
+   Second issue: `Cannot assign to "o" because it is a constant`
+   just open the file where the error is shown and change the variable `o` from
+   `const` to `let`
 
    Run mock data (For Frontend only)
 
